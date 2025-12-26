@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useEffect, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
-// @ts-ignore
+// @ts-expect-error InertiaPlugin is not part of the standard gsap types
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 import "./DotGrid.css";
@@ -43,7 +43,7 @@ interface PointerState {
     lastY: number;
 }
 
-const throttle = <T extends (...args: any[]) => any>(
+const throttle = <T extends (...args: unknown[]) => unknown>(
     func: T,
     limit: number,
 ): ((...args: Parameters<T>) => void) => {
@@ -207,9 +207,11 @@ const DotGrid: React.FC<DotGridProps> = ({
     useEffect(() => {
         buildGrid();
         let ro: ResizeObserver | null = null;
-        if ("ResizeObserver" in window) {
+        if (typeof ResizeObserver !== "undefined") {
             ro = new ResizeObserver(buildGrid);
-            wrapperRef.current && ro.observe(wrapperRef.current);
+            if (wrapperRef.current) {
+                ro.observe(wrapperRef.current);
+            }
         } else {
             window.addEventListener("resize", buildGrid);
         }
@@ -260,7 +262,7 @@ const DotGrid: React.FC<DotGridProps> = ({
                     const pushX = dot.cx - pr.x + vx * 0.005;
                     const pushY = dot.cy - pr.y + vy * 0.005;
                     gsap.to(dot, {
-                        // @ts-ignore
+                        // @ts-expect-error inertia is a GSAP plugin property not in base types
                         inertia: { xOffset: pushX, yOffset: pushY, resistance },
                         onComplete: () => {
                             gsap.to(dot, {
@@ -291,7 +293,7 @@ const DotGrid: React.FC<DotGridProps> = ({
                     const pushX = (dot.cx - cx) * shockStrength * falloff;
                     const pushY = (dot.cy - cy) * shockStrength * falloff;
                     gsap.to(dot, {
-                        // @ts-ignore
+                        // @ts-expect-error inertia is a GSAP plugin property not in base types
                         inertia: { xOffset: pushX, yOffset: pushY, resistance },
                         onComplete: () => {
                             gsap.to(dot, {

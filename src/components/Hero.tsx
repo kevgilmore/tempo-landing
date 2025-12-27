@@ -53,11 +53,11 @@ const Hero = () => {
             </div>
 
             {/* Hero Content Section - Exactly one viewport height */}
-            <div className="relative z-10 w-full h-screen flex flex-col items-center justify-start pt-[12vh] md:pt-[15vh] lg:pt-[18vh] container mx-auto px-4 text-center">
+            <div className="relative z-10 w-full min-h-screen md:h-screen flex flex-col items-center justify-center md:justify-start pt-20 md:pt-[15vh] lg:pt-[18vh] container mx-auto px-4 text-center pb-12 md:pb-0">
                 <SplitText
                     text="Focus with Tempo"
                     tag="h1"
-                    className="text-5xl md:text-8xl font-bold tracking-tight text-white mb-6 block"
+                    className="text-6xl md:text-8xl font-bold tracking-tight text-white mb-4 md:mb-6 block"
                     delay={50}
                     duration={0.8}
                     threshold={0.1}
@@ -65,13 +65,13 @@ const Hero = () => {
                     from={{ opacity: 0, y: 50 }}
                     to={{ opacity: 1, y: 0 }}
                 />
-                <p className="text-lg md:text-2xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+                <p className="text-base md:text-2xl text-slate-300 max-w-3xl mx-auto mb-6 md:mb-10 leading-relaxed">
                     The calm, opinionated time tracker for makers. Pomodoro
                     simplicity with just enough structure to review your day,
                     week, and month.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
                     {/* Split Download Button */}
                     <div
                         className="relative flex items-stretch h-14 z-50"
@@ -131,7 +131,7 @@ const Hero = () => {
                 </div>
 
                 {/* Dashboard Image - Positioned exactly on the fold line (bottom of screen) */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4 z-20 translate-y-1/2">
+                <div className="relative mt-6 md:absolute md:bottom-0 md:left-1/2 md:-translate-x-1/2 w-full max-w-5xl px-4 z-20 translate-y-0 md:translate-y-1/2">
                     <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(46,43,135,0.4)] bg-[#171717]">
                         <img
                             src="/hero-dashboard.png"
@@ -143,7 +143,7 @@ const Hero = () => {
             </div>
 
             {/* Spacer to allow the rest of the image to be scrolled into view */}
-            <div className="h-[40vh] md:h-[50vh] lg:h-[55vh] w-full pointer-events-none"></div>
+            <div className="h-0 md:h-[50vh] lg:h-[55vh] w-full pointer-events-none"></div>
         </section>
     );
 };

@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import Hero from "./components/Hero";
 import SpotlightCard from "./components/SpotlightCard";
 import SplitText from "./components/SplitText";
+import RamComparison from "./components/RamComparison";
+import { useLatestRelease } from "./hooks/useLatestRelease";
 import { Button } from "@/components/ui/button";
 import {
     CheckCircle2,
@@ -43,6 +45,7 @@ const benefits = [
 ];
 
 const DownloadButton = ({ className = "" }: { className?: string }) => {
+    const { x64Url, arm64Url } = useLatestRelease();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -67,10 +70,13 @@ const DownloadButton = ({ className = "" }: { className?: string }) => {
         >
             <Button
                 size="lg"
+                asChild
                 className="bg-[#2e2b87] hover:bg-[#3a37a8] text-white px-8 h-full text-lg rounded-l-full rounded-r-none border-none transition-all shadow-lg shadow-black/20 flex items-center gap-2"
             >
-                <Monitor className="w-5 h-5" />
-                Download for Windows
+                <a href={x64Url}>
+                    <Monitor className="w-5 h-5" />
+                    Download for Windows
+                </a>
             </Button>
             <div className="w-[1px] bg-white/10 h-full"></div>
             <Button
@@ -85,18 +91,24 @@ const DownloadButton = ({ className = "" }: { className?: string }) => {
 
             {isDropdownOpen && (
                 <div className="absolute bottom-full mb-2 left-0 w-full min-w-[220px] bg-[#242424] border border-white/10 rounded-2xl overflow-hidden z-[100] shadow-2xl animate-in fade-in slide-in-from-bottom-2">
-                    <button className="w-full px-6 py-4 text-left hover:bg-[#2e2b87] text-white text-sm border-b border-white/5 transition-colors flex flex-col gap-1">
+                    <a
+                        href={x64Url}
+                        className="w-full px-6 py-4 text-left hover:bg-[#2e2b87] text-white text-sm border-b border-white/5 transition-colors flex flex-col gap-1"
+                    >
                         <span className="font-bold">Windows (x64)</span>
                         <span className="text-xs text-slate-400">
                             Standard 64-bit
                         </span>
-                    </button>
-                    <button className="w-full px-6 py-4 text-left hover:bg-[#2e2b87] text-white text-sm transition-colors flex flex-col gap-1">
+                    </a>
+                    <a
+                        href={arm64Url}
+                        className="w-full px-6 py-4 text-left hover:bg-[#2e2b87] text-white text-sm transition-colors flex flex-col gap-1"
+                    >
                         <span className="font-bold">Windows (ARM64)</span>
                         <span className="text-xs text-slate-400">
                             For Surface & ARM PCs
                         </span>
-                    </button>
+                    </a>
                 </div>
             )}
         </div>
@@ -146,6 +158,8 @@ function App() {
                     ))}
                 </div>
             </section>
+
+            <RamComparison />
 
             {/* Benefits / Why Tempo Section */}
             <section className="py-32 bg-[#1a1a1a] border-y border-white/5">

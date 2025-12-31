@@ -3,8 +3,10 @@ import DotGrid from "./DotGrid";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Monitor } from "lucide-react";
 import SplitText from "./SplitText";
+import { useLatestRelease } from "../hooks/useLatestRelease";
 
 const Hero = () => {
+    const { x64Url, arm64Url } = useLatestRelease();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -82,7 +84,7 @@ const Hero = () => {
                             asChild
                             className="bg-[#2e2b87] hover:bg-[#3a37a8] text-white px-8 h-full text-lg rounded-l-full rounded-r-none border-none transition-all shadow-lg shadow-black/20 flex items-center gap-2"
                         >
-                            <a href="https://github.com/kevgilmore/tempo-app/releases/download/v0.1.25-build.6/Tempo_0.1.25_x64-setup.exe">
+                            <a href={x64Url}>
                                 <Monitor className="w-5 h-5" />
                                 Download for Windows
                             </a>
@@ -102,7 +104,7 @@ const Hero = () => {
                         {isDropdownOpen && (
                             <div className="absolute top-full left-0 mt-2 w-full min-w-[220px] bg-[#242424] border border-white/10 rounded-2xl overflow-hidden z-[100] shadow-2xl animate-in fade-in slide-in-from-top-2">
                                 <a
-                                    href="https://github.com/kevgilmore/tempo-app/releases/download/v0.1.25-build.6/Tempo_0.1.25_x64-setup.exe"
+                                    href={x64Url}
                                     className="w-full px-6 py-4 text-left hover:bg-[#2e2b87] text-white text-sm border-b border-white/5 transition-colors flex flex-col gap-1"
                                 >
                                     <span className="font-bold">
@@ -113,7 +115,7 @@ const Hero = () => {
                                     </span>
                                 </a>
                                 <a
-                                    href="https://github.com/kevgilmore/tempo-app/releases/download/v0.1.25-build.6/Tempo_0.1.25_arm64-setup.exe"
+                                    href={arm64Url}
                                     className="w-full px-6 py-4 text-left hover:bg-[#2e2b87] text-white text-sm transition-colors flex flex-col gap-1"
                                 >
                                     <span className="font-bold">

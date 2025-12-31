@@ -247,7 +247,11 @@ function App() {
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
                         <div>
                             <div className="flex items-center gap-2 mb-4">
-                                <div className="w-8 h-8 bg-[#2e2b87] rounded-lg"></div>
+                                <img
+                                    src="/logo.png"
+                                    alt="Tempo Logo"
+                                    className="w-8 h-8"
+                                />
                                 <span className="text-2xl font-bold tracking-tight">
                                     Tempo
                                 </span>

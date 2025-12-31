@@ -1,4 +1,3 @@
-import React from "react";
 import SplitText from "./SplitText";
 import SpotlightCard from "./SpotlightCard";
 import { Zap } from "lucide-react";
